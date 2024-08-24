@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> CLI Resume</title>
+    <style>
+      :root {
+        --bg-color: #0c0c0c;
+        --text-color: #00ff00;
+        --highlight-color: #00aa00;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Courier New", monospace;
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 20px;
+        margin: 0;
+      }
+
+      #terminal {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        height: 70vh;
+        overflow-y: auto;
+        border: 1px solid var(--text-color);
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      #input-line {
+        display: flex;
+        align-items: center;
+      }
+
+      #prompt {
+        color: var(--highlight-color);
+        margin-right: 5px;
+      }
+
+      #input {
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+        font-family: inherit;
+        font-size: inherit;
+        flex-grow: 1;
+        outline: none;
+      }
+
+      .command {
+        color: var(--highlight-color);
+      }
+
+      .section-title {
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      .section-content {
+        margin-left: 20px;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          font-size: 14px;
+        }
+
+        #terminal {
+          height: 60vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="terminal"></div>
+    <div id="input-line">
+      <span id="prompt">$</span>
+      <input type="text" id="input" autofocus />
+    </div>
+    <script>
+      const terminal = document.getElementById("terminal");
+      const input = document.getElementById("input");
+      const resume = {
+        name: "Bhavya Haritha Mutyala",
+        experience: [
+          {
+            company: "Optum",
+            role: "Data Engineer",
+            period: "April 2024 - Present",
+          },
+          {
+            company: "Innovation Communication Systems",
+            role: "Image Processing Intern",
+            period: "October 2023 - February 2024",
+            description: ["Developed and implemented a defect detection system for tablets using OpenCV Python and YOLOv5.",
+            "Achieved an accuracy rate of 98.5% using YOLOv5.",
+            "Conducted thorough analysis and fine-tuning of algorithm parameters to optimize detection performance."]
+          },
+          {
+            company: "The Weekend Experts",
+            role: "Business Analyst",
+            period: "March 2022 – June 2023",
+            description: ["Successfully devised a detailed roadmap encompassing key steps and milestones for the development of a cutting-edge podcast streaming application.",
+            "Successfully delivered engaging and insightful presentations during the internship, showcasing effective communication and presentation skills.",
+            "Strategically developed a comprehensive social media calendar for ACE IELTS, encompassing content ideas, optimal posting schedules, and effective engagement strategies to enhance the brand's online presence."]
+          },
+          {
+            company:
+              "Research and Training Unit for Navigational Electronics (NERTU)",
+            role: "Programmer",
+            period: "May 2022 - August 2022",
+            description: ["Developed and implemented advanced GNSS receiver algorithms for RAIM, TRAIM, and multipath mitigation, resulting in a 20% improvement in positioning accuracy.",
+            "Acquired practical experience in signal processing and algorithm development.",
+            "Demonstrated strong problem-solving skills and programming expertise."]
+          },
+        ],
+        skills: [
+          "Cloud Services: Azure, AWS",
+          "Infrastructure as Code: Terraform",
+          "CI/CD Pipelines: GitHub Actions",
+          "Big Data Technologies: Apache Spark, Apache Kafka, Databricks",
+          "Data Management: Iceberg",
+          "Programming Languages: Java, C++, Python",
+          "Object-Oriented Programming (OOP)",
+          "Data Structures",
+          "Database Management",
+          "Web Technologies: HTML, CSS",
+          "Computer Networks",
+          "Operating Systems",
+          "Computer Vision: OpenCV, YOLOv5",
+          "Problem-Solving",
+          "Version Control: GitHub",
+          "Data Streaming and Integration",
+          "Cloud Infrastructure Management",
+          "Data Pipeline Monitoring and Troubleshooting",
+        ],
+        education: [
+          {
+            degree: "B.E in Computer Science and Engineering",
+            institution: "University College of Engineering, Osmania University",
+            year: 2023 ,
+            CGPA: 8.62
+          },
+        ],
+        contact: {
+          email: "mbhavya864@gmail.com",
+          linkedin: "www.linkedin.com/in/bhavya-mutyala",
+        }, 
+        projects: [
+          {
+            name: "Placement Management System for University College of Engineering, Osmania University",
+            description: ["Developed a Placement Management System for our university, streamlining the application process and saving significant time for students and the placement office.",
+            "Eliminated the need for manual google form submissions for job applications, reducing student effort and simplifying the process for the placement office.",
+            "Implemented a resource section, providing students with access to practice data structures and track their progress.",
+            "Incorporated a feature to display interview experiences of students, aiding current students in their interview preparation."]
+          },
+          {
+            name: "ATM Machine using Java",
+            description: ["Developed a functional ATM Machine simulation in Java, replicating real-world ATM functionalities.",
+            "Implemented user account authentication, balance inquiry, cash withdrawal, and fund transfer features.",
+            "Utilized object-oriented programming principles to ensure modularity and code reusability."]
+          },
+        ],
+      };
+      const commandHistory = [];
+      let historyIndex = -1;
+      function displayOutput(text, isCommand = false) {
+        const output = document.createElement("div");
+        output.innerHTML = isCommand
+          ? `<span class="command">${text}</span>`
+          : text;
+        terminal.appendChild(output);
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+      function processCommand(cmd) {
+        const [command, ...args] = cmd.toLowerCase().split(" ");
+        switch (command) {
+          case "help":
+            return `Available commands:
+                     - name
+                     - education
+                     - skills
+                     - experience
+                     - projects
+                     - contact
+                     - clear
+                     - all`;
+          case "name":
+            return `<div><strong>Name:</strong> ${resume.name}</div>`;
+
+          case "experience":
+            return `
+<div><strong>Experience:</strong></div>
+<div>
+                           ${resume.experience
+                             .map(
+                               (exp) => `
+<div>
+<div><strong>Company:</strong> ${exp.company}</div>
+<div><strong>Role:</strong> ${exp.role}</div>
+<div><strong>Period:</strong> ${exp.period}</div>
+<div><strong>Description:</strong></div>
+<ul>
+                      ${(Array.isArray(exp.description) ? exp.description : []).map(point => `<li>${point}</li>`).join('')}
+</ul>
+<br>
+</div>
+           `).join('')}
+</div>
+                   `;
+
+          case "skills":
+            return `
+<div><strong>Skills:</strong></div>
+<div>
+                           ${resume.skills
+                             .map((skill) => `<div>${skill}</div>`)
+                             .join("")}
+</div>
+                   `;
+
+          case "education":
+            return `
+      <div><strong>Education:</strong></div>
+      <div>${resume.education
+        .map((edu) => `${edu.degree} from ${edu.institution} in the year ${edu.year} with a CGPA of ${edu.CGPA}`)
+        .join("<br>")}</div>
+                 `;
+          case "contact":
+            return `
+      <div><strong>Contact:</strong></div>
+      <div>
+                         Email: ${resume.contact.email}<br>
+                         LinkedIn: ${resume.contact.linkedin}
+      </div>
+                 `;
+                 case 'projects':
+           return `
+<div><strong>Projects:</strong></div>
+<div>
+                   ${resume.projects.map(proj => `
+<div>
+<div><strong>Project Name:</strong> ${proj.name}</div>
+<div><strong>Description:</strong></div>
+<ul>
+                               ${Array.isArray(proj.description) ? proj.description.map(point => `<li>${point}</li>`).join('') : '<li>No description available</li>'}
+</ul>
+<br>
+</div>
+                   `).join('')}
+</div>
+           `;
+          case "clear":
+            terminal.innerHTML = "";
+            return "";
+          case "all":
+            return `
+<div class="section-title">Name</div>
+<div class="section-content">${resume.name}</div>
+<div class="section-title">Education</div>
+<div class="section-content">${resume.education
+              .map(
+                (edu) => `${edu.degree} from ${edu.institution} in the year ${edu.year}) with a CGPA of ${edu.CGPA}`
+              )
+              .join("<br>")}</div>
+<div class="section-title">Skills</div>
+<div class="section-content">
+                           ${resume.skills
+                             .map((skill) => `<div>${skill}</div>`)
+                             .join("")}
+</div>
+<div class="section-title">Experience</div>
+<div class="section-content">
+                           ${resume.experience
+                             .map(
+                               (exp) => `
+<div>
+<div><strong>Company:</strong> ${exp.company}</div>
+<div><strong>Role:</strong> ${exp.role}</div>
+<div><strong>Period:</strong> ${exp.period}</div>
+<div><strong>Description:</strong></div>
+<ul>
+    ${(Array.isArray(exp.description) ? exp.description : []).map(point => `<li>${point}</li>`).join('')}
+</ul>
+<br>
+</div>
+           `).join('')}
+</div>
+
+<div class="section-title">Projects</div>
+<div class="section-content">
+                   ${resume.projects.map(proj => `
+<div>
+<div><strong>Project Name:</strong> ${proj.name}</div>
+<div><strong>Description:</strong></div>
+<ul>
+                               ${Array.isArray(proj.description) ? proj.description.map(point => `<li>${point}</li>`).join('') : '<li>No description available</li>'}
+</ul>
+<br>
+</div>
+                   `).join('')}
+</div>
+
+
+<div class="section-title">Contact</div>
+<div class="section-content">
+                           Email: ${resume.contact.email}<br>
+                           LinkedIn: ${resume.contact.linkedin}
+</div>
+                   `;
+          default:
+            return `Command not recognized. Type "help" for a list of commands.`;
+        }
+      }
+
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          const cmd = input.value;
+          displayOutput(`$ ${cmd}`, true);
+          const result = processCommand(cmd);
+          displayOutput(result);
+          commandHistory.unshift(cmd);
+          historyIndex = -1;
+          input.value = "";
+        } else if (event.key === "ArrowUp") {
+          historyIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
+          input.value = commandHistory[historyIndex] || "";
+          event.preventDefault();
+        } else if (event.key === "ArrowDown") {
+          historyIndex = Math.max(historyIndex - 1, -1);
+          input.value = commandHistory[historyIndex] || "";
+          event.preventDefault();
+        }
+      });
+      displayOutput(
+        'Welcome to the CLI Resume! Type "help" for a list of commands.'
+      );
+    </script>
+  </body>
+</html>
