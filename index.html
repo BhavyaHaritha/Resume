@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> CLI Resume</title>
+    <title> Bhavya CLI Resume</title>
     <style>
       :root {
         --bg-color: #0c0c0c;
@@ -88,58 +88,61 @@
       const terminal = document.getElementById("terminal");
       const input = document.getElementById("input");
       const resume = {
-        name: "Bhavya Haritha Mutyala",
+        name: "Bhavya Mutyala",
         experience: [
           {
             company: "Optum",
-            role: "Data Engineer",
+            role: "Associate Software Engineer 2",
             period: "April 2024 - Present",
+            description: ["Implemented Trivy integration into CI/CD pipelines, establishing a DevSecOps framework that enabled early vulnerability detection and reduced post-deployment security incidents by approximately 65%.",
+            "Engineered modernization and maintenance of six Azure API Management (APIM) services, executing Jenkins to GitHub Actions migration, Node.js and Terraform upgrades, npm and TypeScript fixes, artifact governance improvements.",
+            "Enhanced platform security by resolving vulnerabilities and performing Postman-based API validation and end-to-end testing after each update, ensuring consistent production stability.",
+            "Provisioned and managed Azure cloud infrastructure using Terraform and Azure CLI, standardizing deployments and improving environment consistency across teams.",
+            "Led migration of conversational AI platforms from Azure Bot Composer to Google Dialogflow CX, architecting conversational flows, intents, and API integrations for scalability and reliability.",
+            "Implemented proactive monitoring and alerting systems on Google Cloud (GCP), ensuring 24/7 uptime and accelerating incident detection.",
+            "Automated performance-testing workflows using Cyara, reducing manual QA time by 30%.",
+            "Designed and delivered Power BI dashboards for healthcare data analytics."]     
           },
           {
             company: "Innovation Communication Systems",
-            role: "Image Processing Intern",
+            role: "Intern",
             period: "October 2023 - February 2024",
-            description: ["Developed and implemented a defect detection system for tablets using OpenCV Python and YOLOv5.",
-            "Achieved an accuracy rate of 98.5% using YOLOv5.",
-            "Conducted thorough analysis and fine-tuning of algorithm parameters to optimize detection performance."]
+            description: ["Developed and deployed an automated tablet defect detection system using YOLOv5 and OpenCV, achieving an accuracy rate of 98.5% across multiple defect categories.",
+            "Streamlined the image preprocessing pipeline through contrast enhancement, noise filtering, and morphological transformations, resulting in a 30% faster inference speed."]       
           },
           {
             company: "The Weekend Experts",
-            role: "Business Analyst",
+            role: "Business Analyst Intern",
             period: "March 2022 – June 2023",
-            description: ["Successfully devised a detailed roadmap encompassing key steps and milestones for the development of a cutting-edge podcast streaming application.",
-            "Successfully delivered engaging and insightful presentations during the internship, showcasing effective communication and presentation skills.",
-            "Strategically developed a comprehensive social media calendar for ACE IELTS, encompassing content ideas, optimal posting schedules, and effective engagement strategies to enhance the brand's online presence."]
+            description: ["Developed a product roadmap outlining key milestones, timelines, and KPIs for a podcast streaming platform, aligning business goals with technical feasibility and user experience priorities.",
+            "Delivered strategic presentations to healthcare professionals, demonstrating the value of digital branding and online presence, resulting in a 60% conversion rate to subscription-based digital portfolio services.",
+            "Created and executed a social media content calendar for ACE IELTS, increasing engagement and reach by approximately 40% within 3 months through data-driven content planning and scheduling.",
+            "Prepared competitive benchmarking reports and performance dashboards to support management in decision-making and content optimization."]
           },
           {
             company:
               "Research and Training Unit for Navigational Electronics (NERTU)",
-            role: "Programmer",
+            role: "Intern",
             period: "May 2022 - August 2022",
-            description: ["Developed and implemented advanced GNSS receiver algorithms for RAIM, TRAIM, and multipath mitigation, resulting in a 20% improvement in positioning accuracy.",
-            "Acquired practical experience in signal processing and algorithm development.",
-            "Demonstrated strong problem-solving skills and programming expertise."]
+            description: ["Designed and implemented advanced GNSS receiver algorithms including RAIM, TRAIM, and multipath mitigation, improving positioning accuracy by 20%.",
+            "Applied signal processing techniques to analyze real-world GNSS signals and develop fault detection logic.",
+            "Gained in-depth understanding of satellite navigation systems through robust experimentation and testing."]
           },
         ],
         skills: [
-          "Cloud Services: Azure",
-          "Infrastructure as Code: Terraform",
-          "CI/CD Pipelines: GitHub Actions",
-          "Big Data Technologies: Apache Spark, Apache Kafka, Databricks",
-          "Data Management: Iceberg",
-          "Programming Languages: Java, C++, Python",
-          "Object-Oriented Programming (OOP)",
-          "Data Structures",
-          "Database Management",
-          "Web Technologies: HTML, CSS",
-          "Computer Networks",
-          "Operating Systems",
-          "Computer Vision: OpenCV, YOLOv5",
-          "Problem-Solving",
-          "Version Control: GitHub",
-          "Data Streaming and Integration",
-          "Cloud Infrastructure Management",
-          "Data Pipeline Monitoring and Troubleshooting",
+          "Programming & Scripting: Python, Node.js, SQL, Java",
+          "DevOps & CI/CD: GitHub Actions, Jenkins, Docker, Terraform",
+          "Cloud Platforms: Microsoft Azure, Google Cloud Platform (GCP), Amazon Web Services (AWS)",
+          "Infrastructure & Automation: Azure CLI, Infrastructure-as-Code (IaC), API Management (APIM)",
+          "Testing & Quality: Postman, Cyara", 
+          "Generative AI & LLM Systems: LangChain, LangGraph, OpenAI GPT, ReAct Agent Architecture, Prompt Engineering, LLM Workflow Design", 
+          "Machine Learning & NLP: Databricks, YOLOv5, OpenCV, Dialogflow CX, Azure Bot Composer", 
+          "Data & Analytics: SQL, Excel, Power BI, Tableau", 
+          "Tools & Version Control: Git, GitHub, VS Code, Linux, PowerShell", 
+          "Core CS: Operating Systems, Computer Networking", 
+          "Soft Skills: Problem-Solving, Cross-Functional Collaboration, Analytical Thinking, Agile Methodologies", 
+          "Business Tools: Jira, Confluence, MS PowerPoint, MS Visio", 
+          "Methodologies: Agile, SDLC",
         ],
         education: [
           {
@@ -149,6 +152,10 @@
             CGPA: 8.62
           },
         ],
+        certifications: [
+            "Microsoft Certified: Azure Fundamentals (AZ-900) – Microsoft, Nov 2024",
+            "Generative AI Certification – Optum Tech University AI Dojo, Sep 2025",
+        ],
         contact: {
           email: "mbhavya864@gmail.com",
           linkedin: "www.linkedin.com/in/bhavya-mutyala",
@@ -156,16 +163,16 @@
         projects: [
           {
             name: "Placement Management System for University College of Engineering, Osmania University",
-            description: ["Developed a Placement Management System for our university, streamlining the application process and saving significant time for students and the placement office.",
-            "Eliminated the need for manual google form submissions for job applications, reducing student effort and simplifying the process for the placement office.",
-            "Implemented a resource section, providing students with access to practice data structures and track their progress.",
-            "Incorporated a feature to display interview experiences of students, aiding current students in their interview preparation."]
+            description: ["Developed a full-stack web application to digitize the university’s placement process, reducing manual record-keeping time.",
+            "Designed and implemented a normalized MySQL database with 10+ interconnected tables to store student, recruiter, and placement data, cutting retrieval time by 40%.",
+            "Built secure backend APIs for authentication, job postings, and application management, handling 1,000+ student records efficiently."]
           },
           {
-            name: "ATM Machine using Java",
-            description: ["Developed a functional ATM Machine simulation in Java, replicating real-world ATM functionalities.",
-            "Implemented user account authentication, balance inquiry, cash withdrawal, and fund transfer features.",
-            "Utilized object-oriented programming principles to ensure modularity and code reusability."]
+            name: "AI-Driven Healthcare Insurance Claim Approval Agent",
+            description: ["Engineered an end-to-end agentic AI pipeline using LangGraph ReAct architecture, automating healthcare claim validation through structured LLM reasoning and decision-making.",
+            "Integrated three domain-specific tools (summarize_patient_record, summarize_policy_guideline, check_claim_coverage) with modular tool-use orchestration for deterministic workflow execution.",
+            "Implemented a scalable Python-based data processing layer for JSON ingestion, policy retrieval, and eligibility evaluation, achieving >90% classification accuracy on benchmark datasets.",
+            "Optimized prompt templates and tool-chain logic to enhance reasoning traceability, reduce LLM hallucinations, and ensure explainable decision generation."]
           },
         ],
       };
@@ -225,7 +232,16 @@
                              .join("")}
 </div>
                    `;
-
+          case "certifications":
+            return `
+      <div><strong>Certifications:</strong></div>
+      <div>
+                          ${resume.certifications
+                            .map((certification) => `<div>${certification}</div>`)
+                             .join("")}
+                        
+      </div>
+                 `;
           case "education":
             return `
       <div><strong>Education:</strong></div>
@@ -274,6 +290,12 @@
 <div class="section-content">
                            ${resume.skills
                              .map((skill) => `<div>${skill}</div>`)
+                             .join("")}
+</div>
+<div class="section-title">Certifications</div>
+<div class="section-content">
+                           ${resume.certifications
+                             .map((certification) => `<div>${certification}</div>`)
                              .join("")}
 </div>
 <div class="section-title">Experience</div>
@@ -345,3 +367,4 @@
     </script>
   </body>
 </html>
+
